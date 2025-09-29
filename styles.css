@@ -148,7 +148,10 @@ html,body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
   .chips{gap:.4rem;overflow:auto;-webkit-overflow-scrolling:touch;padding-bottom:.2rem}
   .chips .chip{padding:.35rem .65rem;font-size:.9rem}
   .grid{grid-template-columns:1fr;gap:12px;padding:0 .8rem;margin-bottom:72px}
-  .card img{height:220px}
+  .card img{
+    height:clamp(260px,56vw,340px);
+    object-fit:cover
+  }
   .modal{width:96vw;margin:0 auto}
   .gallery{padding:8px}
   .gallery img{aspect-ratio:1/1}
