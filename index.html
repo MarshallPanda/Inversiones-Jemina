@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inversiones Jemina – Catálogo</title>
+
+   
+    <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Splash / Transición con audio interno -->
+    <section id="splash" class="splash" aria-label="Transición inicial">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+
+        <div class="rings">
+            <div class="ring r1"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+        </div>
+
+        <div class="particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <!-- tarjeta -->
+        <div class="splash-card">
+            <div class="logo big pulse">
+                <!-- Se setea desde app.js con la URL del favicon -->
+                <img id="logoSplashImg" src="img/favicon.jpg" alt="Inversiones Jemina" />
+            </div>
+            <h1 class="title reveal">Inversiones Jemina</h1>
+            <p class="subtitle fade">Catálogo en línea</p>
+
+            <div class="progress">
+                <div class="bar" id="splashBar"></div>
+            </div>
+
+            <div class="splash-cta">
+                <button id="skipSplash" class="btn sm" title="Omitir transición">Omitir</button>
+            </div>
+        </div>
+
+        <!-- Audio interno del splash -->
+        <audio id="splashAudio" preload="metadata" autoplay muted playsinline>
+            <!-- Muy liviano -->
+            <source src="audio/audio1.opus" type="audio/ogg; codecs=opus">
+            <source src="audio/audio1.webm" type="audio/webm; codecs=opus">
+            <!-- Fallback compatible con Safari/iOS -->
+            <source src="audio/audio1.m4a" type="audio/mp4">
+        </audio>
+
+    </section>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="brand">
+            <div class="logo mini">
+                <!-- favicon -->
+                <img id="logoSplashImg" src="img/favicon.jpg" alt="Inversiones Jemina" />
+            </div>
+            <span>Inversiones Jemina</span>
+        </div>
+
+        <button id="openCart" class="btn cart-btn" aria-label="Abrir carrito">
+            🧺 <span id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- Buscador -->
+    <section class="search-bar">
+        <input id="searchInput" type="search" placeholder="Buscar producto, marca o categoría…" />
+    </section>
+
+    <!-- Filtros -->
+    <details id="filtersWrap" class="filters-collapsible" open>
+        <summary>
+            <span>Filtros</span>
+            <div style="display:flex;gap:.5rem;align-items:center">
+                <button id="applyFilters" class="btn sm" type="button">Aplicar</button>
+                <button id="clearFilters" class="btn btn-outline sm" type="button">Limpiar</button>
+            </div>
+        </summary>
+
+        <section class="filters">
+            <div class="filter-group">
+                <label>Precio (S/):</label>
+                <div class="price">
+                    <input id="minPrice" type="number" min="0" value="0" />
+                    <span>—</span>
+                    <input id="maxPrice" type="number" min="0" value="9999" />
+                </div>
+                <small id="priceHint" class="muted"></small>
+            </div>
+
+            <div class="filter-group">
+                <label>Categorías:</label>
+                <div id="categoryFilters" class="chips"></div>
+            </div>
+        </section>
+    </details>
+
+    <!-- Grid -->
+    <main>
+        <div id="productsGrid" class="grid"></div>
+    </main>
+
+    <!-- Modal / Detalle -->
+    <dialog id="productModal" class="modal">
+        <form method="dialog" class="modal-body">
+            <button class="modal-close" id="closeModal" aria-label="Cerrar">✕</button>
+            <div class="modal-grid">
+                <div class="gallery">
+                    <img id="galleryMain" alt="Producto" />
+                    <div id="galleryThumbs" class="thumbs"></div>
+                </div>
+                <div class="info">
+                    <h2 id="modalName"></h2>
+                    <div class="rating">★★★★★ <span id="modalBrand" class="muted"></span></div>
+                    <div class="price-line"><span class="price" id="modalPrice">S/ 0.00</span></div>
+                    <p id="modalDesc" class="muted"></p>
+
+                    <div class="option-block">
+                        <label>Colores:</label>
+                        <div id="modalColors" class="chips"></div>
+                    </div>
+
+                    <div class="option-block">
+                        <label>Tallas:</label>
+                        <div id="modalSizes" class="chips"></div>
+                        <small class="muted">* El precio puede variar según la talla.</small>
+                    </div>
+
+                    <div class="qty-line">
+                        <button type="button" id="qtyMinus" class="btn sm">−</button>
+                        <span id="qtyValue">1</span>
+                        <button type="button" id="qtyPlus" class="btn sm">+</button>
+                    </div>
+
+                    <div class="cta-line">
+                        <button type="button" id="addToCart" class="btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Carrito -->
+    <aside id="cartDrawer" class="cart" aria-label="Carrito">
+        <header class="cart-head">
+            <h3>Carrito para cotización</h3>
+            <button id="closeCart" class="btn sm btn-outline">Cerrar</button>
+        </header>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <footer class="cart-foot">
+            <div class="summary">
+                <div><span>Subtotal:</span><strong id="subTotal">S/ 0.00</strong></div>
+            </div>
+            <button id="quoteBtn" class="btn whatsapp">Solicitar cotización por WhatsApp</button>
+            <button id="clearCart" class="btn btn-outline">Vaciar carrito</button>
+        </footer>
+    </aside>
+
+    <!-- Scripts -->
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
