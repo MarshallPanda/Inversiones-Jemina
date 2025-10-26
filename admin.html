@@ -2,123 +2,87 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Pro · Inversiones Jemina</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADMIN · Inversiones Jemina</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="admin-shell">
+<body>
   <div class="topbar">
     <div class="topbar-inner">
       <div style="display:flex;align-items:center;gap:10px">
-        <div class="logo-badge"></div>
+        <div class="logo-badge"><img src="logo.png"></div>
         <strong>ADMIN · INVERSIONES JEMINA</strong>
       </div>
       <div class="kit">
-        <button class="btn primary" id="btnNew">+ Nuevo</button>
+        <button class="btn" id="btnNew">+ Nuevo</button>
+        <button class="btn" id="btnAct">Activos</button>
+        <button class="btn" id="btnInact">Desactivados</button>
         <button class="btn" id="btnAll">Todos</button>
-        <button class="btn" id="btnOn">Activos</button>
-        <button class="btn" id="btnOff">Desactivados</button>
-        <span style="width:16px"></span>
-        <button class="btn" id="btnImport">Cargar JSON</button>
-        <button class="btn" id="btnSave">Guardar (borrador)</button>
-        <button class="btn success" id="btnPublish">Publicar</button>
-        <a id="btnDownload" class="btn" style="display:none">Descargar JSON</a>
-        <button class="btn" onclick="location.href='index.html'">Ver tienda</button>
-        <input type="file" id="filePick" accept="application/json" style="display:none">
+        <button class="btn" id="btnLoad">Cargar JSON</button>
+        <button class="btn" id="btnSaveDraft">Guardar (borrador)</button>
+        <button class="btn primary" id="btnPublish">Publicar</button>
+        <button class="btn" id="btnDownload">Descargar JSON</button>
+        <a class="btn" href="index.html" target="_blank">Ver tienda</a>
       </div>
     </div>
   </div>
 
   <div class="admin-main">
-    <!-- MASTER LIST -->
     <aside class="master">
       <div class="master-head">
-        <input id="q" placeholder="Buscar por nombre, marca o categoría" style="flex:1;padding:10px;border:1px solid var(--border);border-radius:10px">
+        <input id="search" placeholder="Buscar..." style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:8px">
       </div>
       <div class="master-list" id="list"></div>
     </aside>
 
-    <!-- DETAIL PANEL -->
     <section class="detail">
       <div class="detail-inner">
-        <div>
-          <div class="block">
-            <h3>Información básica</h3>
-            <div class="form">
-              <div>
-                <label>ID</label>
-                <input id="f_id">
-              </div>
-              <div>
-                <label>Marca</label>
-                <input id="f_brand">
-              </div>
-              <div class="full">
-                <label>Nombre</label>
-                <input id="f_name">
-              </div>
-              <div>
-                <label>Categoría</label>
-                <input id="f_category">
-              </div>
-              <div>
-                <label>Precio base</label>
-                <input type="number" step="0.01" id="f_price">
-              </div>
-              <div>
-                <label>% Descuento</label>
-                <input type="number" step="1" id="f_discount">
-              </div>
-              <div class="state-line">
-                <label>Estado</label>
-                <div id="f_toggle" class="toggle"></div>
-                <span id="f_state" class="note">Desactivado</span>
+        <div class="block">
+          <h3>Editor</h3>
+          <div class="form" id="form">
+            <label>ID<input id="f_id"></label>
+            <label>Nombre<input id="f_name"></label>
+            <label>Marca<input id="f_brand"></label>
+            <label>Precio<input type="number" id="f_price"></label>
+            <label>Descuento %<input type="number" id="f_disc"></label>
+            <label>Categoría<input id="f_cat"></label>
+            <label class="full">Descripción<textarea id="f_desc" rows="4"></textarea></label>
+            <div class="state-line full">
+              <div>Estado:</div>
+              <div class="toggle" id="f_active"></div><div id="stateTxt">Inactivo</div>
+            </div>
+            <div class="full">
+              <h4>Imágenes</h4>
+              <div class="gallery-row" id="gallery"></div>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <input id="f_img" placeholder="URL de imagen" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:8px">
+                <button class="btn" id="btnAddImg">Agregar</button>
               </div>
             </div>
           </div>
-
-          <div class="block">
-            <h3>Imágenes</h3>
-            <div class="gallery-big">
-              <div class="thumbs" id="f_thumbs"></div>
-              <div class="hero-big"><img id="f_hero" src="https://via.placeholder.com/800x600?text=Producto"></div>
-            </div>
-            <div class="actions-row" style="margin-top:8px">
-              <input id="f_imgUrl" placeholder="URL de imagen" style="flex:1">
-              <button class="btn" id="f_addImg">Agregar</button>
-            </div>
-          </div>
-
-          <div class="block">
-            <h3>Descripción</h3>
-            <textarea id="f_desc" rows="6" class="full"></textarea>
+          <div class="actions-row">
+            <button class="btn" id="btnDup">Duplicar</button>
+            <button class="btn" id="btnDel">Borrar</button>
           </div>
         </div>
 
-        <div class="preview-sticky">
-          <div class="block">
-            <h3>Previsualización</h3>
-            <div class="card preview">
-              <div class="imgwrap"><img id="p_img" src=""></div>
-              <div class="content">
-                <div class="brand-txt" id="p_brand"></div>
-                <div class="title" id="p_title"></div>
-                <div><span class="price" id="p_price"></span> <span class="price-old" id="p_old"></span></div>
-                <div style="display:flex;gap:6px;align-items:center"><div id="p_badge" class="badge" style="display:none"></div><span class="badge-chip" id="p_cat"></span></div>
-              </div>
-            </div>
-            <hr class="separator">
-            <div style="display:flex;gap:8px;justify-content:flex-end">
-              <button class="btn" id="f_dup">Duplicar</button>
-              <button class="btn warn" id="f_del">Borrar</button>
+        <div class="block">
+          <h3>Previsualización</h3>
+          <div class="card">
+            <div class="imgwrap"><img id="p_img"></div>
+            <div class="content">
+              <div class="brand-txt" id="p_brand"></div>
+              <div class="title" id="p_name"></div>
+              <div><span class="price" id="p_price"></span> <span class="price-old" id="p_old"></span></div>
+              <div class="card-actions"><button class="cta">Agregar al carrito</button><button class="fav">♡</button></div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   </div>
 
-  <script src="admin.pro.js"></script>
+  <input type="file" id="file" accept=".json" hidden>
+  <script src="admin.js"></script>
 </body>
 </html>

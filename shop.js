@@ -2,8 +2,9 @@
 const NOIMG = "https://via.placeholder.com/600x400?text=Producto";
 
 let ALL = [];
-let FILTERS = { q:"", cats:new Set(), min:0, max:0 };
+let FILTERS = { q:"", cats:new Set(), min:0, max:0, favOnly:false };
 let CART = [];
+let FAVS = new Set(JSON.parse(localStorage.getItem('favorites')||"[]"));
 
 const el = sel => document.querySelector(sel);
 const fmt = n => "S/ " + (Math.round(n*100)/100).toFixed(2);
@@ -50,11 +51,11 @@ function buildFilters(){
   el('#minLabel').textContent = fmt(FILTERS.min);
   el('#maxLabel').textContent = fmt(FILTERS.max);
   ['#rangeMin','#rangeMax'].forEach(s=>{
-    el(s).min = 0; el(s).max = b.max;
+    el(s).min = 0; el(s).max = b.max; el(s).step = 1; el(s).style.zIndex = (s==='#rangeMax'?4:3);
   });
   el('#rangeMin').value = 0;
   el('#rangeMax').value = b.max;
-  updateFill();
+  updateFill(true);
 
   const map = new Map();
   ALL.filter(p=>p.active).forEach(p=> map.set(p.category || "Sin categoría",(map.get(p.category||"Sin categoría")||0)+1));
@@ -65,18 +66,25 @@ function buildFilters(){
     row.innerHTML = `<div><input type="checkbox" data-cat="${name}"> ${name}</div><span>(${count})</span>`;
     list.appendChild(row);
   });
+
+  el('#toggleFavorites').classList.toggle('on', FILTERS.favOnly);
+  el('#toggleFavorites').textContent = FILTERS.favOnly ? '♥' : '♡';
 }
 
-function updateFill(){
-  const min = Number(el('#rangeMin').value);
-  const max = Number(el('#rangeMax').value);
-  const limit = Number(el('#rangeMax').max);
+function updateFill(initial=false){
+  const rMin = el('#rangeMin'), rMax = el('#rangeMax');
+  let min = Number(rMin.value), max = Number(rMax.value);
+  if(min>max){ const t=min; min=max; max=t; }
+  const limit = Number(rMax.max);
   const left = (min/limit)*100;
   const right = 100 - (max/limit)*100;
   el('#rangeFill').style.left = left+'%';
   el('#rangeFill').style.right = right+'%';
-  el('#minLabel').textContent = fmt(Math.min(min,max));
-  el('#maxLabel').textContent = fmt(Math.max(min,max));
+  el('#minLabel').textContent = fmt(min);
+  el('#maxLabel').textContent = fmt(max);
+  if(min >= max-1){ rMin.style.zIndex = 5; rMax.style.zIndex = 4; }
+  else { rMin.style.zIndex = 3; rMax.style.zIndex = 4; }
+  if(!initial){ applyFilters(); }
 }
 
 function applyFilters(){
@@ -94,6 +102,7 @@ function applyFilters(){
     const [mi,ma] = minMaxPrice(p);
     return ma >= rmin && mi <= rmax;
   });
+  if(FILTERS.favOnly) arr = arr.filter(p=>FAVS.has(String(p.id)));
 
   if(sort==='pricelow') arr.sort((a,b)=>minMaxPrice(a)[0]-minMaxPrice(b)[0]);
   else if(sort==='pricehigh') arr.sort((a,b)=>minMaxPrice(b)[0]-minMaxPrice(a)[0]);
@@ -111,6 +120,7 @@ function renderGrid(arr){
     const old = p.priceOld ? `<span class="price-old">${fmt(p.priceOld)}</span>` : "";
     const badge = p.discountPct ? `<div class="badge">-${p.discountPct}%</div>` : "";
     const img = (p.images && p.images[0]) || NOIMG;
+    const favOn = FAVS.has(String(p.id));
     const card = document.createElement('div');
     card.className = "card";
     card.innerHTML = `
@@ -124,12 +134,22 @@ function renderGrid(arr){
         <div>${priceTxt} ${old}</div>
         <div class="card-actions">
           <button class="cta">Agregar al carrito</button>
-          <button class="fav">♡</button>
+          <button class="fav ${favOn?'on':''}" data-id="${p.id}">${favOn?'♥':'♡'}</button>
         </div>
       </div>`;
     card.querySelector('.cta').addEventListener('click',()=> addToCart(p) );
+    card.querySelector('.fav').addEventListener('click',(e)=> toggleFav(e, p.id) );
     g.appendChild(card);
   });
+}
+
+function toggleFav(e, id){
+  id = String(id);
+  if(FAVS.has(id)) FAVS.delete(id); else FAVS.add(id);
+  localStorage.setItem('favorites', JSON.stringify(Array.from(FAVS)));
+  e.target.classList.toggle('on');
+  e.target.textContent = e.target.classList.contains('on') ? '♥' : '♡';
+  if(FILTERS.favOnly) applyFilters();
 }
 
 function addToCart(p, qty=1, size=null){
@@ -183,7 +203,13 @@ function bindUI(){
       applyFilters();
     }
   });
-  ['#rangeMin','#rangeMax'].forEach(s=> el(s).addEventListener('input', ()=>{ updateFill(); }));
+  ['#rangeMin','#rangeMax'].forEach(s=> el(s).addEventListener('input', ()=> updateFill() ));
+  el('#toggleFavorites').addEventListener('click',()=>{
+    FILTERS.favOnly = !FILTERS.favOnly;
+    el('#toggleFavorites').classList.toggle('on', FILTERS.favOnly);
+    el('#toggleFavorites').textContent = FILTERS.favOnly? '♥' : '♡';
+    applyFilters();
+  });
   el('#gotoCheckout').addEventListener('click',()=>alert('Flujo de checkout no implementado en esta demo.'));
 }
 
