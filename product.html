@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Producto · Inversiones Jemina</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo" style="text-decoration:none;color:inherit">
+        <div class="logo-badge"></div>
+        <div class="brand">INVERSIONES JEMINA</div>
+      </a>
+      <div class="socials" title="Síguenos">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">ig</a>
+        <a href="#" aria-label="TikTok">tt</a>
+      </div>
+      <div class="search" style="max-width:520px">
+        <input id="gobackSearch" placeholder="Buscar en catálogo (enter)" />
+        <button class="icon-btn" onclick="location.href='index.html'">🏬</button>
+      </div>
+      <button class="icon-btn" id="openCart">🛒</button>
+    </div>
+  </header>
+
+  <nav class="breadcrumb"><a href="index.html">Inicio</a> / <span id="bcCat">Producto</span></nav>
+  <main class="pdp-shell" id="pdp"></main>
+
+  <!-- Drawer Carrito -->
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <strong>Tu carrito</strong>
+      <button class="btn" id="closeCart">Cerrar</button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-footer">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="count">Subtotal</div>
+        <div id="cartSubtotal" style="font-weight:900">S/ 0.00</div>
+      </div>
+      <button class="fullbtn" id="gotoCheckout">Ir al carrito</button>
+    </div>
+  </aside>
+
+  <script src="products.json" type="application/json" id="embeddedProducts"></script>
+  <script src="product.js"></script>
+</body>
+</html>

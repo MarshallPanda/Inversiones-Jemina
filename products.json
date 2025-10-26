@@ -1,0 +1,141 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop HP 15.6” Windows 11 Home Intel Core i3 8GB 512GB SSD",
+    "brand": "HP",
+    "category": "Computación",
+    "price": 2399.0,
+    "discountPct": 33,
+    "priceOld": 2399.0,
+    "images": [
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1280&auto=format&fit=crop"
+    ],
+    "description": "Laptop para actividades diarias con 8GB RAM y 512GB SSD.",
+    "variants": {
+      "sizes": [],
+      "colors": []
+    },
+    "badges": {
+      "freeShipping": true,
+      "exclusive": false,
+      "percentOff": 33
+    },
+    "stock": 12,
+    "seller": "La Curacao",
+    "tags": [
+      "laptop",
+      "hp"
+    ],
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "Parlante Strudel Anfibio EV 500 BT USB TWS Luces RGB",
+    "brand": "Eversound",
+    "category": "Audio",
+    "price": 94.0,
+    "discountPct": 0,
+    "images": [
+      "https://images.unsplash.com/photo-1518449073235-22463c7a1110?q=80&w=1280&auto=format&fit=crop"
+    ],
+    "description": "Parlante resistente al agua con luces RGB.",
+    "variants": {
+      "sizes": [],
+      "colors": []
+    },
+    "stock": 30,
+    "seller": "Orlesur",
+    "tags": [
+      "parlante"
+    ],
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "Zapatillas Urban Pro",
+    "brand": "RunnerX",
+    "category": "Calzado",
+    "price": 159.0,
+    "discountPct": 10,
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1280&auto=format&fit=crop"
+    ],
+    "description": "Zapatillas cómodas con estilo urbano.",
+    "variants": {
+      "sizes": [
+        {
+          "name": "38",
+          "deltaPrice": 0,
+          "stock": 5
+        },
+        {
+          "name": "39",
+          "deltaPrice": 10,
+          "stock": 5
+        },
+        {
+          "name": "40",
+          "deltaPrice": 15,
+          "stock": 3
+        }
+      ],
+      "colors": [
+        "Negro",
+        "Blanco"
+      ]
+    },
+    "stock": 13,
+    "seller": "Fashion Hub",
+    "tags": [
+      "zapatillas",
+      "urbano"
+    ],
+    "active": true
+  },
+  {
+    "id": 4,
+    "name": "Kit de Válvula de Gas SGA Regular",
+    "brand": "Marca",
+    "category": "Hogar",
+    "price": 45.0,
+    "discountPct": 22,
+    "images": [
+      "https://images.unsplash.com/photo-1565538420870-da08ff96a207?q=80&w=1280&auto=format&fit=crop"
+    ],
+    "description": "Kit de válvula de gas SGA regular para máxima protección.",
+    "variants": {
+      "sizes": [],
+      "colors": []
+    },
+    "stock": 8,
+    "seller": "Orlesur",
+    "tags": [
+      "valvula",
+      "gas"
+    ],
+    "active": true
+  },
+  {
+    "id": 5,
+    "name": "Mouse Gamer VX500",
+    "brand": "HyperTech",
+    "category": "Computación",
+    "price": 79.0,
+    "discountPct": 5,
+    "images": [
+      "https://images.unsplash.com/photo-1587202372775-98927b5751d2?q=80&w=1280&auto=format&fit=crop"
+    ],
+    "description": "Mouse ergonómico con 7 botones programables.",
+    "variants": {
+      "sizes": [],
+      "colors": []
+    },
+    "stock": 22,
+    "seller": "Infotec",
+    "tags": [
+      "mouse",
+      "gamer"
+    ],
+    "active": false
+  }
+]

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Pro · Inversiones Jemina</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-shell">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="logo-badge"></div>
+        <strong>ADMIN · INVERSIONES JEMINA</strong>
+      </div>
+      <div class="kit">
+        <button class="btn primary" id="btnNew">+ Nuevo</button>
+        <button class="btn" id="btnAll">Todos</button>
+        <button class="btn" id="btnOn">Activos</button>
+        <button class="btn" id="btnOff">Desactivados</button>
+        <span style="width:16px"></span>
+        <button class="btn" id="btnImport">Cargar JSON</button>
+        <button class="btn" id="btnSave">Guardar (borrador)</button>
+        <button class="btn success" id="btnPublish">Publicar</button>
+        <a id="btnDownload" class="btn" style="display:none">Descargar JSON</a>
+        <button class="btn" onclick="location.href='index.html'">Ver tienda</button>
+        <input type="file" id="filePick" accept="application/json" style="display:none">
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-main">
+    <!-- MASTER LIST -->
+    <aside class="master">
+      <div class="master-head">
+        <input id="q" placeholder="Buscar por nombre, marca o categoría" style="flex:1;padding:10px;border:1px solid var(--border);border-radius:10px">
+      </div>
+      <div class="master-list" id="list"></div>
+    </aside>
+
+    <!-- DETAIL PANEL -->
+    <section class="detail">
+      <div class="detail-inner">
+        <div>
+          <div class="block">
+            <h3>Información básica</h3>
+            <div class="form">
+              <div>
+                <label>ID</label>
+                <input id="f_id">
+              </div>
+              <div>
+                <label>Marca</label>
+                <input id="f_brand">
+              </div>
+              <div class="full">
+                <label>Nombre</label>
+                <input id="f_name">
+              </div>
+              <div>
+                <label>Categoría</label>
+                <input id="f_category">
+              </div>
+              <div>
+                <label>Precio base</label>
+                <input type="number" step="0.01" id="f_price">
+              </div>
+              <div>
+                <label>% Descuento</label>
+                <input type="number" step="1" id="f_discount">
+              </div>
+              <div class="state-line">
+                <label>Estado</label>
+                <div id="f_toggle" class="toggle"></div>
+                <span id="f_state" class="note">Desactivado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Imágenes</h3>
+            <div class="gallery-big">
+              <div class="thumbs" id="f_thumbs"></div>
+              <div class="hero-big"><img id="f_hero" src="https://via.placeholder.com/800x600?text=Producto"></div>
+            </div>
+            <div class="actions-row" style="margin-top:8px">
+              <input id="f_imgUrl" placeholder="URL de imagen" style="flex:1">
+              <button class="btn" id="f_addImg">Agregar</button>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Descripción</h3>
+            <textarea id="f_desc" rows="6" class="full"></textarea>
+          </div>
+        </div>
+
+        <div class="preview-sticky">
+          <div class="block">
+            <h3>Previsualización</h3>
+            <div class="card preview">
+              <div class="imgwrap"><img id="p_img" src=""></div>
+              <div class="content">
+                <div class="brand-txt" id="p_brand"></div>
+                <div class="title" id="p_title"></div>
+                <div><span class="price" id="p_price"></span> <span class="price-old" id="p_old"></span></div>
+                <div style="display:flex;gap:6px;align-items:center"><div id="p_badge" class="badge" style="display:none"></div><span class="badge-chip" id="p_cat"></span></div>
+              </div>
+            </div>
+            <hr class="separator">
+            <div style="display:flex;gap:8px;justify-content:flex-end">
+              <button class="btn" id="f_dup">Duplicar</button>
+              <button class="btn warn" id="f_del">Borrar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <script src="admin.pro.js"></script>
+</body>
+</html>
