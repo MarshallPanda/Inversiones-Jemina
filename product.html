@@ -3,54 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Producto · Inversiones Jemina</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Producto – Inversiones Jemina</title>
+  <link rel="icon" href="logo.png" type="image/png"/>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <header class="header">
-    <div class="header-inner container">
-      <a href="index.html" class="logo" style="text-decoration:none;color:inherit">
-        <div class="logo-badge"><img src="logo.png" alt="Logo"></div>
-        <div class="brand">INVERSIONES JEMINA</div>
-      </a>
-      <div class="socials" title="Síguenos">
-        <a href="#" class="fb" aria-label="Facebook" title="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5.02 3.66 9.19 8.44 9.93v-7.02H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.74 8.44-4.91 8.44-9.93z"/></svg>
-        </a>
-        <a href="#" class="ig" aria-label="Instagram" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm6.5-.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 9a3 3 0 100 6 3 3 0 000-6z"/></svg>
-        </a>
-        <a href="#" class="tt" aria-label="TikTok" title="TikTok">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3a6 6 0 01.3 1.8 4.7 4.7 0 003.6 3.5 6.7 6.7 0 010 2.6A7.6 7.6 0 0116 9.6v4.4a5.6 5.6 0 11-5-5.6 6 6 0 010 2.7 3 3 0 100 5.8 3 3 0 003-3V3h2z"/></svg>
-        </a>
-      </div>
-      <div class="search" style="max-width:520px">
-        <input id="gobackSearch" placeholder="Buscar en catálogo (enter)" />
-        <button class="icon-btn" onclick="location.href='index.html'">🏬</button>
-      </div>
-      <button class="icon-btn" id="openCart">🛒</button>
+    <div class="brand">
+      <img src="logo.png" class="logo-badge" alt="logo"/>
+      <h1><a href="index.html">INVERSIONES JEMINA</a></h1>
     </div>
   </header>
-
-  <nav class="breadcrumb"><a href="index.html">Inicio</a> / <span id="bcCat">Producto</span></nav>
-  <main class="pdp-shell" id="pdp"></main>
-
-  <aside class="drawer" id="cartDrawer">
-    <div class="drawer-header">
-      <strong>Tu carrito</strong>
-      <button class="btn" id="closeCart">Cerrar</button>
-    </div>
-    <div class="drawer-body" id="cartItems"></div>
-    <div class="drawer-footer">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="count">Subtotal</div>
-        <div id="cartSubtotal" style="font-weight:900">S/ 0.00</div>
-      </div>
-      <button class="fullbtn" id="gotoCheckout">Ir al carrito</button>
-    </div>
-  </aside>
-
-  <script src="products.json" type="application/json" id="embeddedProducts"></script>
+  <main class="pdp">
+    <div id="pdp"></div>
+  </main>
   <script src="product.js"></script>
 </body>
 </html>

@@ -3,94 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inversiones Jemina - Catálogo</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>INVERSIONES JEMINA – Catálogo</title>
+  <link rel="icon" href="logo.png" type="image/png"/>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <header class="header">
-    <div class="header-inner container">
-      <div class="logo">
-        <div class="logo-badge"><img src="logo.png" alt="Logo"></div>
-        <div class="brand">INVERSIONES JEMINA</div>
-        <div class="socials" title="Síguenos">
-          <a href="#" class="fb" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5.02 3.66 9.19 8.44 9.93v-7.02H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.74 8.44-4.91 8.44-9.93z"/></svg>
-          </a>
-          <a href="#" class="ig" aria-label="Instagram" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm6.5-.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 9a3 3 0 100 6 3 3 0 000-6z"/></svg>
-          </a>
-          <a href="#" class="tt" aria-label="TikTok" title="TikTok">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3a6 6 0 01.3 1.8 4.7 4.7 0 003.6 3.5 6.7 6.7 0 010 2.6A7.6 7.6 0 0116 9.6v4.4a5.6 5.6 0 11-5-5.6 6 6 0 010 2.7 3 3 0 100 5.8 3 3 0 003-3V3h2z"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="search">
-        <input id="searchInput" placeholder="¿Qué estás buscando?">
-        <button class="icon-btn" id="doSearch">🔍</button>
-      </div>
-      <button class="icon-btn" id="openCart">🛒</button>
+    <div class="brand">
+      <img src="logo.png" class="logo-badge" alt="logo"/>
+      <h1>INVERSIONES JEMINA</h1>
+    </div>
+    <div class="searchbar">
+      <input id="q" placeholder="¿Qué estás buscando?" />
+    </div>
+    <div class="toolbar">
+      <select id="sort">
+        <option value="relevance">Relevancia</option>
+        <option value="price_asc">Precio ↑</option>
+        <option value="price_desc">Precio ↓</option>
+      </select>
+      <button id="btnFavs" title="Ver favoritos">♡</button>
     </div>
   </header>
 
-  <main class="container">
-    <div class="layout">
-      <aside class="sidebar" id="sidebar">
-        <div class="panel">
-          <div class="filter-group">
-            <h3>Precio</h3>
-            <div class="price-row"><span id="minLabel">S/ 0.00</span><span id="maxLabel">S/ 0.00</span></div>
-            <div class="range-wrap">
-              <div class="range-fill" id="rangeFill"></div>
-              <input type="range" min="0" max="0" step="1" value="0" id="rangeMin">
-              <input type="range" min="0" max="0" step="1" value="0" id="rangeMax">
-            </div>
-            <div style="margin-top:8px">
-              <button class="apply-btn" id="applyPrice">Aplicar</button>
-              <button class="reset-btn" id="resetFilters">Reiniciar</button>
-            </div>
-          </div>
-          <hr class="sep">
-          <div class="filter-group">
-            <h3>Categoría</h3>
-            <div class="cat-list" id="catList"></div>
-          </div>
-        </div>
-      </aside>
-
-      <section>
-        <div class="toolbar">
-          <div class="count" id="countInfo">Se muestran 0</div>
-          <div class="toolbar-right">
-            <select class="sort" id="sortSelect">
-              <option value="rel">Relevancia</option>
-              <option value="pricelow">Precio: menor a mayor</option>
-              <option value="pricehigh">Precio: mayor a menor</option>
-              <option value="discount">Mayor descuento</option>
-            </select>
-            <button class="fav-toggle" id="toggleFavorites" title="Ver solo favoritos">♡</button>
-          </div>
-        </div>
-        <div class="grid" id="grid"></div>
-      </section>
-    </div>
+  <main class="layout">
+    <aside class="filters">
+      <h3>Precio</h3>
+      <div class="range">
+        <label>S/ <span id="minVal">0</span></label>
+        <input type="range" id="minRange" min="0" max="0" value="0">
+        <label>S/ <span id="maxVal">0</span></label>
+        <input type="range" id="maxRange" min="0" max="0" value="0">
+      </div>
+      <button id="apply">Aplicar</button>
+      <button id="reset">Reiniciar</button>
+      <hr/>
+      <div id="count"></div>
+    </aside>
+    <section id="grid" class="grid"></section>
   </main>
 
-  <aside class="drawer" id="cartDrawer">
-    <div class="drawer-header">
-      <strong>Tu carrito</strong>
-      <button class="btn" id="closeCart">Cerrar</button>
-    </div>
-    <div class="drawer-body" id="cartItems"></div>
-    <div class="drawer-footer">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="count">Subtotal</div>
-        <div id="cartSubtotal" style="font-weight:900">S/ 0.00</div>
-      </div>
-      <button class="fullbtn" id="gotoCheckout">Ir al carrito</button>
-    </div>
-  </aside>
-
-  <script src="products.json" type="application/json" id="embeddedProducts"></script>
   <script src="shop.js"></script>
 </body>
 </html>
