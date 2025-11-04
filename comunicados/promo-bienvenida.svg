@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="220" viewBox="0 0 1200 220">
+  <rect width="1200" height="220" fill="#fff7cc"/>
+  <rect x="8" y="184" width="1184" height="28" rx="6" fill="#F9D43A"/>
+  <text x="12" y="203" font-family="Inter, Arial" font-size="14" font-weight="700" fill="#1E3A8A">Promo de Bienvenida</text>
+</svg>

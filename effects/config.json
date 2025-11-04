@@ -1,0 +1,8 @@
+{
+  "enabled": false,
+  "svg": "flakes.svg",
+  "mode": "tile",
+  "size": "120px",
+  "opacity": 0.85,
+  "disable_on_checkout": true
+}

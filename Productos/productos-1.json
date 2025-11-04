@@ -1,43 +1,93 @@
 [
   {
-    "id": "1",
-    "name": "Mouse Gamer RGB",
-    "brand": "Evel",
-    "image": "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1200&q=60",
-    "price": 99.0,
-    "discount": 0.05,
-    "category": "Computación",
-    "stock": 25,
-    "variants": {
-      "sizes": [
-        {
-          "name": "Standard"
-        }
-      ]
+    "id": "hp-156-fdo131la",
+    "sku": "HP15FDO131LA",
+    "nombre": "Laptop HP 15.6” Windows 11 Home Intel Core i3 8GB 512GB SSD (15-FDO131LA)",
+    "descripcion_corta": "15.6” FHD, 8GB RAM, 512GB SSD, Wi‑Fi 6",
+    "descripcion_larga": "Conéctate fácilmente con herramientas colaborativas, visualización sorprendente, y almacenamiento rápido. Diseño liviano y batería para todo el día.",
+    "categoria": "Computación",
+    "precio": 1599.0,
+    "precio_anterior": 2399.0,
+    "descuento": {
+      "tipo": "porcentaje",
+      "valor": 33
     },
-    "description": "Mouse gamer con luces RGB y sensor de alta precisión.",
-    "active": true
+    "imagenes": [
+      "img/products/laptops/hp15.svg"
+    ],
+    "variantes": [],
+    "stock": 7,
+    "destacado": true,
+    "envio_gratis": true,
+    "sku_tienda": "CUR-HP15",
+    "vendedor": "La Curacao",
+    "fecha_publicacion": "2025-10-15"
   },
   {
-    "id": "2",
-    "name": "Parlante Bluetooth 50W",
-    "brand": "Evel",
-    "image": "https://images.unsplash.com/photo-1585386959984-a4155223168f?auto=format&fit=crop&w=1200&q=60",
-    "price": 189.0,
-    "discount": 0.2,
-    "category": "Audio",
-    "stock": 15,
-    "variants": {
-      "sizes": [
-        {
-          "name": "Negro"
-        },
-        {
-          "name": "Azul"
-        }
-      ]
+    "id": "eversound-ev500a",
+    "sku": "EV500A",
+    "nombre": "Parlante Strudel Anfibio EV 500 BT USB TWS Luces RGB",
+    "descripcion_corta": "Portable, resistente, luces RGB, BT/USB",
+    "descripcion_larga": "Parlante portátil resistente con sonido envolvente, conexión BT y luces RGB. Ideal para interiores y exteriores.",
+    "categoria": "Audio",
+    "precio": 94.0,
+    "precio_anterior": null,
+    "descuento": null,
+    "imagenes": [
+      "img/products/audio/speaker.svg"
+    ],
+    "variantes": [],
+    "stock": 30,
+    "destacado": false,
+    "envio_gratis": false,
+    "vendedor": "Orlesur",
+    "fecha_publicacion": "2025-09-20"
+  },
+  {
+    "id": "honor-400-256gb",
+    "sku": "HONOR400-256",
+    "nombre": "Honor 400 5G 256GB Negro",
+    "descripcion_corta": "Pantalla fluida, 5G, 256GB almacenamiento",
+    "descripcion_larga": "Rendimiento 5G con gran capacidad y cámara versátil. Batería para un día completo.",
+    "categoria": "Celulares",
+    "precio": 2499.0,
+    "precio_anterior": null,
+    "descuento": null,
+    "imagenes": [
+      "img/products/phones/honor.svg"
+    ],
+    "variantes": [
+      {
+        "color": "Negro"
+      }
+    ],
+    "stock": 12,
+    "destacado": true,
+    "envio_gratis": false,
+    "vendedor": "INFOTEC SHOP",
+    "fecha_publicacion": "2025-10-05"
+  },
+  {
+    "id": "hp-victus-15-gamer",
+    "sku": "HPVIC15",
+    "nombre": "Laptop Gamer HP Victus 15.6” Windows 11 – RTX 3050",
+    "descripcion_corta": "RTX 3050, 16GB RAM, 512GB SSD",
+    "descripcion_larga": "Gráficos dedicados para gaming y software creativo, con refrigeración optimizada.",
+    "categoria": "Computación",
+    "precio": 2999.0,
+    "precio_anterior": 4199.0,
+    "descuento": {
+      "tipo": "porcentaje",
+      "valor": 29
     },
-    "description": "Sonido potente con batería de larga duración y modo fiesta.",
-    "active": true
+    "imagenes": [
+      "img/products/laptops/gaming.svg"
+    ],
+    "variantes": [],
+    "stock": 5,
+    "destacado": true,
+    "envio_gratis": true,
+    "vendedor": "Exclusivo",
+    "fecha_publicacion": "2025-10-22"
   }
 ]

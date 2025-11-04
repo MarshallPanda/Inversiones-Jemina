@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin · Catálogo</title>
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --ink:#111827; --muted:#6b7280;
+      --accent:#f5c518; --accent-ink:#111;
+      --ok:#16a34a; --warn:#ef4444; --line:#e5e7eb;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,Segoe UI,Roboto,Inter,Arial}
+    a{color:inherit}
+    .toolbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;
+      padding:14px 16px;background:linear-gradient(180deg, #fff 0%, #fff8 100%);border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(6px)}
+    .toolbar h1{font-size:16px;margin:0 8px 0 0;font-weight:700}
+    .spacer{flex:1}
+    .btn{background:var(--accent);color:var(--accent-ink);border:none;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:600;box-shadow:0 2px 0 #e2b50b}
+    .btn.secondary{background:#111;color:#fff;box-shadow:none}
+    .btn.ghost{background:#fff;border:1px solid var(--line);box-shadow:none}
+    .btn.small{padding:8px 10px}
+    .wrap{display:grid;grid-template-columns:340px 1fr;gap:16px;padding:16px;max-width:1200px;margin:0 auto}
+    .panel{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.06);border:1px solid var(--line)}
+    .panel .head{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+    .panel .body{padding:14px}
+    .list{max-height:calc(100vh - 160px);overflow:auto}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}
+    th{position:sticky;top:0;background:#fff;z-index:1}
+    tr{cursor:pointer}
+    tr:hover{background:#fafafa}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-weight:600}
+    input[type="text"], input[type="number"], select, textarea{
+      border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;outline:none
+    }
+    textarea{min-height:80px;resize:vertical}
+    .row{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+    .img-input{flex:1}
+    .muted{color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .preview{padding:14px;border-top:1px dashed var(--line);}
+    .card{border:1px solid var(--line);border-radius:12px;padding:10px}
+    .price-row{display:grid;grid-template-columns:1fr 110px;gap:10px;align-items:end}
+    .final-price{font-weight:800}
+    .badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:4px 8px;font-size:12px}
+    @media (max-width: 920px){
+      .wrap{grid-template-columns:1fr}
+      .list{max-height:unset}
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <h1>Administrador del Catálogo</h1>
+    <span class="muted">Productos · JSON</span>
+    <div class="spacer"></div>
+    <button class="btn secondary" id="btn-draft">Guardar borrador</button>
+    <button class="btn" id="btn-publish">Publicar</button>
+  </div>
+
+  <div class="wrap">
+    <section class="panel">
+      <div class="head"><strong>Productos</strong><button class="btn small ghost" id="btn-new">Nuevo</button></div>
+      <div class="body list">
+        <table id="tbl">
+          <thead><tr><th>Nombre</th><th>Categoría</th><th>Precio</th><th>SKU</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="head"><strong>Editor</strong><div class="actions">
+        <button class="btn small ghost" id="btn-preview">Previsualizar</button>
+        <button class="btn small" id="btn-add">Añadir</button>
+        <button class="btn small" id="btn-update" disabled>Guardar cambios</button>
+        <button class="btn small secondary" id="btn-delete" disabled>Eliminar</button>
+      </div></div>
+      <div class="body">
+        <div class="grid">
+          <div class="field"><label>Nombre</label><input id="p_nombre" type="text" placeholder="Ej. Laptop HP 15.6”"></div>
+          <div class="field"><label>SKU</label><input id="p_sku" type="text" placeholder="SKU-..."></div>
+          <div class="field"><label>Categoría</label><input id="p_cat" type="text" placeholder="Computación"></div>
+          <div class="field"><label>Vendedor</label><input id="p_vendor" type="text" placeholder="La Curacao"></div>
+        </div>
+
+        <div class="grid" style="margin-top:8px">
+          <div class="field">
+            <label>Precio base</label>
+            <input id="p_precio_base" type="number" min="0" step="0.01" placeholder="0.00">
+            <span class="muted">Este es el precio original sin descuento.</span>
+          </div>
+          <div class="field">
+            <label>Descuento (%)</label>
+            <input id="p_desc_pct" type="number" min="0" max="100" step="1" value="0">
+            <span class="muted">Se aplica sobre el precio base.</span>
+          </div>
+        </div>
+
+        <div class="price-row" style="margin:10px 0">
+          <div class="muted">Precio final calculado</div>
+          <div class="final-price" id="p_precio_final">S/ 0.00</div>
+        </div>
+
+        <div class="grid">
+          <div class="field"><label>Stock</label><input id="p_stock" type="number" min="0" step="1" value="0"></div>
+          <div class="field"><label>Envío gratis</label>
+            <select id="p_envio"><option value="false">No</option><option value="true">Sí</option></select>
+          </div>
+          <div class="field"><label>Destacado</label>
+            <select id="p_dest"><option value="false">No</option><option value="true">Sí</option></select>
+          </div>
+        </div>
+
+        <div class="grid" style="margin-top:8px">
+          <div class="field"><label>Descripción corta</label><input id="p_desc_c" type="text" placeholder="Breve resumen (visible en tarjetas)"></div>
+          <div class="field"><label>Descripción larga</label><textarea id="p_desc_l" placeholder="Detalles del producto..."></textarea></div>
+        </div>
+
+        <div class="field" style="margin-top:8px">
+          <label>Imágenes (ruta o URL)</label>
+          <div id="imgsBox"></div>
+          <span class="muted">Escribe una URL y automáticamente aparecerá otro campo para agregar más. Puedes quitar campos con “Quitar”.</span>
+        </div>
+
+        <div class="preview">
+          <div class="muted" style="margin-bottom:6px">Previsualización</div>
+          <div id="preview" class="grid"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

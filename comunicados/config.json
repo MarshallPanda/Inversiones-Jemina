@@ -1,0 +1,11 @@
+{
+  "activo": false,
+  "modo": "floating",
+  "imagen": "promo-bienvenida.svg",
+  "enlace": "#",
+  "inicio": "2025-10-01",
+  "fin": "2026-12-31",
+  "cerrable": true,
+  "posicion": "br",
+  "width": 260
+}
